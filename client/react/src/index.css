@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  /* Ramp Colors */
+
+  --color-lime-signal: #e4f222;
+  --color-cobalt-glow: #5683d2;
+
+  --color-obsidian: #0c0a08;
+  --color-charcoal: #1a1919;
+
+  --color-paper: #ffffff;
+  --color-limestone: #f4f2f0;
+
+  --color-fog: #999ba3;
+  --color-slate: #4d505d;
+  --color-bone: #d2cecb;
+
+  --radius-control: 4px;
+  --radius-surface: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #ffffff;
+}
+
+body {
+  margin: 0;
+
+  background: #ffffff;
+  color: #0c0a08;
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f2f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d2cecb;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999ba3;
+}

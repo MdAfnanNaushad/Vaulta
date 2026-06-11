@@ -1,0 +1,13 @@
+export const TRANSACTION_TYPES =
+{
+  INVESTMENT:
+    "INVESTMENT",
+
+  ROI: "ROI",
+
+  REFERRAL:
+    "REFERRAL",
+
+  WITHDRAWAL:
+    "WITHDRAWAL",
+};

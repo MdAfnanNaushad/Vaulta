@@ -1,0 +1,10 @@
+export const INVESTMENT_STATUS =
+{
+  ACTIVE: "ACTIVE",
+
+  COMPLETED:
+    "COMPLETED",
+
+  CANCELLED:
+    "CANCELLED",
+};
