@@ -20,7 +20,7 @@ class CronRepository {
       },
       {
         new: true,
-      }
+      },
     );
   }
 }

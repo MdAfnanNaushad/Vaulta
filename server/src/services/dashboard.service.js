@@ -38,10 +38,14 @@ class DashboardService {
         user.walletBalance,
 
       totalROIEarned:
-        user.totalROIEarned,
+        roiTotal?.[0]?.total ||
+        user.totalROIEarned ||
+        0,
 
       totalLevelIncome:
-        user.totalLevelIncomeEarned,
+        referralTotal?.[0]?.total ||
+        user.totalLevelIncomeEarned ||
+        0,
 
       totalInvestment:
         investmentSummary.totalInvestment || 0,

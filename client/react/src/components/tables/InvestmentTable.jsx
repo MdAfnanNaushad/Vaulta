@@ -6,9 +6,9 @@ const InvestmentTable = ({
   return (
     <div
       className="
-        bg-[#f4f2f0]
+        bg-white dark:bg-slate-900
         border
-        border-[#d2cecb]
+        border-slate-200 dark:border-slate-700
         rounded-[12px]
         overflow-hidden
       "
@@ -19,7 +19,7 @@ const InvestmentTable = ({
           px-6
           py-5
           border-b
-          border-[#d2cecb]
+          border-slate-200 dark:border-slate-700
           bg-white
         "
       >
@@ -27,7 +27,7 @@ const InvestmentTable = ({
           className="
             text-[24px]
             font-medium
-            text-[#0c0a08]
+            text-slate-900 dark:text-white
           "
         >
           Investment Portfolio
@@ -51,7 +51,7 @@ const InvestmentTable = ({
               className="
                 bg-white
                 border-b
-                border-[#d2cecb]
+               border-slate-200 dark:border-slate-700
               "
             >
               <th
@@ -159,7 +159,7 @@ const InvestmentTable = ({
                       className="
                         px-6
                         py-5
-                        text-[#0c0a08]
+                        text-slate-900 dark:text-white
                         font-medium
                       "
                     >
@@ -172,7 +172,7 @@ const InvestmentTable = ({
                       className="
                         px-6
                         py-5
-                        text-[#0c0a08]
+                        text-slate-900 dark:text-white
                       "
                     >
                       ₹
@@ -185,7 +185,7 @@ const InvestmentTable = ({
                       className="
                         px-6
                         py-5
-                        text-[#0c0a08]
+                        text-slate-900 dark:text-white
                       "
                     >
                       {
@@ -233,7 +233,7 @@ const InvestmentTable = ({
                           text-[13px]
                           font-medium
                           bg-[#e4f222]/40
-                          text-[#0c0a08]
+                          text-slate-900 dark:text-white
                         "
                       >
                         {

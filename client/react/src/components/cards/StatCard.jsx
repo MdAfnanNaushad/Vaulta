@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
 
-const StatCard = ({
-  title,
-  value,
-  icon,
-}) => {
+const StatCard = ({ title, value, icon }) => {
   return (
     <motion.div
       whileHover={{
@@ -21,7 +17,8 @@ const StatCard = ({
         border
         border-[#d2cecb]
 
-        bg-[#f4f2f0]
+        bg-white
+dark:bg-slate-900
 
         p-6
 
@@ -93,7 +90,8 @@ const StatCard = ({
 
           h-[1px]
 
-          bg-[#d2cecb]
+          border-slate-200
+dark:border-slate-700
         "
       />
 
@@ -119,7 +117,8 @@ const StatCard = ({
           className="
             text-sm
 
-            text-[#0c0a08]
+            text-slate-900
+dark:text-white
 
             group-hover:translate-x-1
 

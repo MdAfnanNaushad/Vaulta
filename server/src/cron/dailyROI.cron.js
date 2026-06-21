@@ -6,7 +6,7 @@ import logger from "../config/logger.js";
 
 const startDailyROICron = () => {
   cron.schedule(
-    "0 0 * * *",
+    "* * * * *",
     async () => {
       try {
         logger.info(

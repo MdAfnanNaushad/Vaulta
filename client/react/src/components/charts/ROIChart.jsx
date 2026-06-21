@@ -20,8 +20,10 @@ const ROIChart = ({ data }) => {
       className="
         rounded-[12px]
         border
-        border-[#d2cecb]
-        bg-[#f4f2f0]
+        border-slate-200
+dark:border-slate-700
+       bg-white
+dark:bg-slate-900
         p-6
       "
     >
@@ -42,7 +44,8 @@ const ROIChart = ({ data }) => {
             mt-2
             text-2xl
             font-medium
-            text-[#0c0a08]
+            text-slate-900
+dark:text-white
           "
         >
           ROI Growth
@@ -59,10 +62,7 @@ const ROIChart = ({ data }) => {
         </p>
       </div>
 
-      <ResponsiveContainer
-        width="100%"
-        height={340}
-      >
+      <ResponsiveContainer width="100%" height={340}>
         <AreaChart
           data={formattedData}
           margin={{
@@ -73,30 +73,13 @@ const ROIChart = ({ data }) => {
           }}
         >
           <defs>
-            <linearGradient
-              id="roiGradient"
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="1"
-            >
-              <stop
-                offset="5%"
-                stopColor="#e4f222"
-                stopOpacity={0.8}
-              />
-              <stop
-                offset="95%"
-                stopColor="#e4f222"
-                stopOpacity={0}
-              />
+            <linearGradient id="roiGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#e4f222" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#e4f222" stopOpacity={0} />
             </linearGradient>
           </defs>
 
-          <CartesianGrid
-            stroke="#d2cecb"
-            strokeDasharray="4 4"
-          />
+          <CartesianGrid stroke="#d2cecb" strokeDasharray="4 4" />
 
           <XAxis
             dataKey="month"

@@ -22,8 +22,8 @@ const EarningsChart = ({
       className="
         rounded-[12px]
         border
-        border-[#d2cecb]
-        bg-[#f4f2f0]
+        border-slate-200 dark:border-slate-700
+        bg-white dark:bg-slate-900
         p-6
       "
     >
@@ -33,7 +33,7 @@ const EarningsChart = ({
             text-[13px]
             uppercase
             tracking-wide
-            text-[#999ba3]
+            text-slate-900 dark:text-white
           "
         >
           Earnings

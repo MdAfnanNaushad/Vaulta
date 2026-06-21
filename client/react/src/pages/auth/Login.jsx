@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import { loginUser } from "../../api/auth.api";
 
 const Login = () => {
@@ -30,6 +30,10 @@ const Login = () => {
         "refreshToken",
         result.refreshToken
       );
+      localStorage.setItem(
+  "user",
+  JSON.stringify(result.user)
+);
 
       navigate("/", {
         replace: true,
@@ -49,7 +53,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-white px-6">
       <div className="w-full max-w-md rounded-[12px] border border-[#d2cecb] bg-[#f4f2f0] p-8">
         <h1 className="text-4xl font-medium text-[#0c0a08]">
-          NexaChain
+          Vaulta
         </h1>
 
         <p className="mt-2 text-[#999ba3]">
@@ -86,6 +90,12 @@ const Login = () => {
             Sign In
           </button>
         </form>
+        <p className="mt-5 text-center text-sm text-[#999ba3]">
+          Don't have an accout Register Here?{" "}
+          <Link to="/register" className="text-[#0c0a08] font-medium">
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );

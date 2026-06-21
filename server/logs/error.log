@@ -1,2 +1,7 @@
 {"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.8cjrk.mongodb.net","level":"error","syscall":"querySrv","timestamp":"2026-06-11T09:05:01.945Z"}
 {"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.8cjrk.mongodb.net","level":"error","syscall":"querySrv","timestamp":"2026-06-11T09:30:49.558Z"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.8cjrk.mongodb.net","level":"error","syscall":"querySrv","timestamp":"2026-06-11T09:50:49.147Z"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.8cjrk.mongodb.net","level":"error","syscall":"querySrv","timestamp":"2026-06-20T13:21:55.900Z"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.8cjrk.mongodb.net","level":"error","syscall":"querySrv","timestamp":"2026-06-20T13:26:17.508Z"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.8cjrk.mongodb.net","level":"error","syscall":"querySrv","timestamp":"2026-06-20T13:28:54.364Z"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.cluster0.8cjrk.mongodb.net","level":"error","syscall":"querySrv","timestamp":"2026-06-20T13:29:29.146Z"}

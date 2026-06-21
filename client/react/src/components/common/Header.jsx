@@ -1,23 +1,15 @@
-import {
-  Bell,
-  Menu,
-  Search,
-} from "lucide-react";
+import { Bell, Menu, Search, Sun, Moon } from "lucide-react";
 
-import {
-  useLocation,
-} from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useProfile } from "../../hooks/useProfile";
+import { useTheme } from "../context/ThemeContext";
 
-const Header = ({
-  toggleSidebar,
-}) => {
-  const location =
-    useLocation();
+const Header = ({ toggleSidebar }) => {
+  const { dark, setDark } = useTheme();
+  const location = useLocation();
 
   const getPageTitle = () => {
-    switch (
-      location.pathname
-    ) {
+    switch (location.pathname) {
       case "/":
         return "Dashboard";
 
@@ -37,25 +29,28 @@ const Header = ({
         return "Dashboard";
     }
   };
-
+  const { data: user } = useProfile();
   return (
     <header
-      className="
-        sticky
-        top-0
-        z-40
+  className="
+    sticky
+    top-0
+    z-40
 
-        bg-white/95
-        backdrop-blur-xl
+    bg-white/95
+    dark:bg-slate-900/95
 
-        border-b
-        border-[#d2cecb]
-      "
-    >
+    border-b
+    border-slate-200
+    dark:border-slate-700
+
+    backdrop-blur-xl
+  "
+>
       <div
         className="
           h-20
-          px-6
+          px-4
           md:px-8
 
           flex
@@ -63,19 +58,18 @@ const Header = ({
           justify-between
         "
       >
-        {/* Left */}
+        {/* LEFT */}
         <div className="flex items-center gap-4">
+          {/* Mobile Toggle */}
           <button
-            onClick={
-              toggleSidebar
-            }
+            onClick={toggleSidebar}
             className="
               md:hidden
 
               h-10
               w-10
 
-              rounded-[4px]
+              rounded-md
 
               border
               border-[#d2cecb]
@@ -84,19 +78,36 @@ const Header = ({
               items-center
               justify-center
 
-              text-[#0c0a08]
+              hover:bg-[#f4f2f0]
+
+              transition-all
             "
           >
-            <Menu size={18} />
+            <Menu size={20} />
           </button>
+
+          {/* Mobile Logo */}
+          <img
+            src="/Logo.png"
+            alt="Vaulta"
+            className="
+    h-40
+    w-40
+    object-contain
+    md:hidden
+  "
+          />
 
           <div>
             <h1
               className="
-                text-[32px]
+                text-2xl
+                md:text-[32px]
+
                 leading-none
                 font-medium
-                text-[#0c0a08]
+                text-slate-900
+dark:text-white
               "
             >
               {getPageTitle()}
@@ -114,7 +125,7 @@ const Header = ({
           </div>
         </div>
 
-        {/* Right */}
+        {/* RIGHT */}
         <div
           className="
             flex
@@ -136,7 +147,7 @@ const Header = ({
 
               w-[320px]
 
-              rounded-[4px]
+              rounded-md
 
               border
               border-[#d2cecb]
@@ -160,12 +171,39 @@ const Header = ({
                 outline-none
 
                 text-sm
-                text-[#0c0a08]
 
                 placeholder:text-[#999ba3]
               "
             />
           </div>
+          <button
+  onClick={() => setDark(!dark)}
+  className="
+    h-11
+    w-11
+
+    rounded-xl
+
+    border
+    border-slate-200
+    dark:border-slate-700
+
+    flex
+    items-center
+    justify-center
+
+    bg-white
+    dark:bg-slate-800
+
+    transition-all
+  "
+>
+  {dark ? (
+    <Sun size={18} />
+  ) : (
+    <Moon size={18} />
+  )}
+</button>
 
           {/* Notification */}
           <button
@@ -175,7 +213,7 @@ const Header = ({
               h-11
               w-11
 
-              rounded-[4px]
+              rounded-md
 
               border
               border-[#d2cecb]
@@ -185,8 +223,6 @@ const Header = ({
               flex
               items-center
               justify-center
-
-              text-[#0c0a08]
 
               hover:bg-[#f4f2f0]
 
@@ -221,7 +257,7 @@ const Header = ({
               px-3
               py-2
 
-              rounded-[12px]
+              rounded-xl
 
               border
               border-[#d2cecb]
@@ -247,7 +283,7 @@ const Header = ({
                 font-medium
               "
             >
-              A
+              {user?.fullName?.charAt(0)?.toUpperCase() || "U"}
             </div>
 
             <div className="hidden sm:block">
@@ -258,7 +294,7 @@ const Header = ({
                   text-[#0c0a08]
                 "
               >
-                Afnan
+                {user?.fullName || "User"}
               </h3>
 
               <p
@@ -267,7 +303,7 @@ const Header = ({
                   text-[#999ba3]
                 "
               >
-                Investor
+                {user?.role || "USER"}
               </p>
             </div>
           </div>

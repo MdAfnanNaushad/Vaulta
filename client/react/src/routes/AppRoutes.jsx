@@ -13,11 +13,12 @@ import Investments from "../pages/investments/Investments";
 import ReferralTree from "../pages/referrals/ReferralTree";
 import Wallet from "../pages/wallet/Wallet";
 import Profile from "../pages/profile/Profile";
-
+import Register from "../pages/auth/Register";
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Public Routes */}
+      <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
 
       {/* Protected Routes */}

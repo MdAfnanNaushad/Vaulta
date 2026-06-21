@@ -1,8 +1,10 @@
 import ROIHistory from "../models/ROIHistory.js";
 
 class ROIRepository {
-  async create(payload  ,session = null) {
-    return ROIHistory.create(payload),{session};
+  async create(payload, session = null) {
+    const [roi] = await ROIHistory.create([payload], { session });
+
+    return roi;
   }
 
   async exists(investmentId, date) {
@@ -17,9 +19,7 @@ class ROIRepository {
       user: userId,
     })
       .populate("investment")
-      .sort({
-        createdAt: -1,
-      });
+      .sort({ createdAt: -1 });
   }
 
   async getDailyEarnings(userId) {
@@ -59,37 +59,35 @@ class ROIRepository {
   }
 
   async getMonthlyROI(userId) {
-  return ROIHistory.aggregate([
-    {
-      $match: {
-        user: userId,
-      },
-    },
-    {
-      $group: {
-        _id: {
-          year: {
-            $year: "$date",
-          },
-
-          month: {
-            $month: "$date",
-          },
-        },
-
-        total: {
-          $sum: "$roiAmount",
+    return ROIHistory.aggregate([
+      {
+        $match: {
+          user: userId,
         },
       },
-    },
-    {
-      $sort: {
-        "_id.year": 1,
-        "_id.month": 1,
+      {
+        $group: {
+          _id: {
+            year: {
+              $year: "$date",
+            },
+            month: {
+              $month: "$date",
+            },
+          },
+          total: {
+            $sum: "$roiAmount",
+          },
+        },
       },
-    },
-  ]);
-}
+      {
+        $sort: {
+          "_id.year": 1,
+          "_id.month": 1,
+        },
+      },
+    ]);
+  }
 }
 
 export default new ROIRepository();

@@ -1,11 +1,22 @@
 import Transaction from "../models/Transaction.js";
 
 class TransactionRepository {
-  async create(payload,session=null) {
-    return Transaction.create(payload),{session};
+  async create(
+    payload,
+    session = null
+  ) {
+    const [transaction] =
+      await Transaction.create(
+        [payload],
+        { session }
+      );
+
+    return transaction;
   }
 
-  async getUserTransactions(userId) {
+  async getUserTransactions(
+    userId
+  ) {
     return Transaction.find({
       user: userId,
     }).sort({
@@ -14,17 +25,17 @@ class TransactionRepository {
   }
 
   async getRecentTransactions(
-  userId,
-  limit = 10
-) {
-  return Transaction.find({
-    user: userId,
-  })
-    .sort({
-      createdAt: -1,
+    userId,
+    limit = 10
+  ) {
+    return Transaction.find({
+      user: userId,
     })
-    .limit(limit);
-}
+      .sort({
+        createdAt: -1,
+      })
+      .limit(limit);
+  }
 }
 
 export default new TransactionRepository();

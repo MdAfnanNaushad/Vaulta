@@ -5,7 +5,9 @@ import { Toaster } from "sonner";
 
 import App from "./App";
 import QueryProvider from "./providers/QueryProvider";
-
+import {
+  ThemeProvider
+} from "../src/components/context/ThemeContext";
 import "./index.css";
 
 ReactDOM.createRoot(
@@ -14,7 +16,9 @@ ReactDOM.createRoot(
   <React.StrictMode>
     <BrowserRouter>
       <QueryProvider>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
 
         <Toaster
           richColors

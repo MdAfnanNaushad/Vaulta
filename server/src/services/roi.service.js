@@ -1,27 +1,20 @@
-import mongoose from "mongoose";
-
 import userRepository from "../repositories/user.repository.js";
 import roiRepository from "../repositories/roi.repository.js";
 import transactionRepository from "../repositories/transaction.repository.js";
 
 class ROIService {
-  async processInvestmentROI(
-    investment
-  ) {
-    const session =
-      await mongoose.startSession();
-
-    session.startTransaction();
-
+  async processInvestmentROI(investment) {
     try {
+      console.log("================================");
+      console.log("PROCESSING INVESTMENT");
+      console.log("Investment ID:", investment._id);
+      console.log("Plan:", investment.planName);
+      console.log("User:", investment.user);
+      console.log("================================");
+
       const today = new Date();
 
-      today.setHours(
-        0,
-        0,
-        0,
-        0
-      );
+      today.setHours(0, 0, 0, 0);
 
       const alreadyProcessed =
         await roiRepository.exists(
@@ -30,18 +23,27 @@ class ROIService {
         );
 
       if (alreadyProcessed) {
-        await session.abortTransaction();
+        console.log(
+          "ROI already processed for:",
+          investment._id
+        );
 
         return null;
       }
 
       const roiAmount =
-        (investment.amount *
-          investment.dailyROIPercentage) /
-        100;
+        (
+          investment.amount *
+          investment.dailyROIPercentage
+        ) / 100;
 
-      await roiRepository.create(
-        {
+      console.log(
+        "ROI Amount:",
+        roiAmount
+      );
+
+      const roiHistory =
+        await roiRepository.create({
           user:
             investment.user._id,
 
@@ -53,24 +55,37 @@ class ROIService {
           date: today,
 
           status: "CREDITED",
-        },
-        session
+        });
+
+      console.log(
+        "ROI History Created:",
+        roiHistory
       );
 
-      await userRepository.incrementWallet(
-        investment.user._id,
-        roiAmount,
-        session
+      const walletUpdated =
+        await userRepository.incrementWallet(
+          investment.user._id,
+          roiAmount
+        );
+
+      console.log(
+        "Wallet Updated:",
+        walletUpdated?.walletBalance
       );
 
-      await userRepository.incrementROI(
-        investment.user._id,
-        roiAmount,
-        session
+      const roiUpdated =
+        await userRepository.incrementROI(
+          investment.user._id,
+          roiAmount
+        );
+
+      console.log(
+        "ROI Updated:",
+        roiUpdated?.totalROIEarned
       );
 
-      await transactionRepository.create(
-        {
+      const transaction =
+        await transactionRepository.create({
           user:
             investment.user._id,
 
@@ -82,55 +97,74 @@ class ROIService {
             investment.planName,
 
           status: "SUCCESS",
-        },
-        session
-      );
+        });
 
-      await session.commitTransaction();
+      console.log(
+        "Transaction Created:",
+        transaction?._id
+      );
 
       return roiAmount;
     } catch (error) {
-      await session.abortTransaction();
+      console.error(
+        "================================"
+      );
+      console.error(
+        "ROI PROCESSING FAILED"
+      );
+      console.error(error);
+      console.error(
+        "================================"
+      );
 
       throw error;
-    } finally {
-      session.endSession();
     }
   }
-  async processMultipleInvestments(
-  investments
-) {
-  const results = [];
 
-  for (const investment of investments) {
-    try {
-      const roi =
-        await this.processInvestmentROI(
-          investment
+  async processMultipleInvestments(
+    investments
+  ) {
+    const results = [];
+
+    for (const investment of investments) {
+      try {
+        const roi =
+          await this.processInvestmentROI(
+            investment
+          );
+
+        results.push({
+          investmentId:
+            investment._id,
+          success: true,
+          roi,
+        });
+      } catch (error) {
+        console.error(
+          "FAILED INVESTMENT:",
+          investment._id
         );
 
-      results.push({
-        investmentId:
-          investment._id,
+        console.error(error);
 
-        success: true,
-
-        roi,
-      });
-    } catch (error) {
-      results.push({
-        investmentId:
-          investment._id,
-
-        success: false,
-
-        error: error.message,
-      });
+        results.push({
+          investmentId:
+            investment._id,
+          success: false,
+          error:
+            error.message,
+        });
+      }
     }
-  }
 
-  return results;
-}
+    console.log(
+      "FINAL ROI RESULTS:"
+    );
+
+    console.log(results);
+
+    return results;
+  }
 }
 
 export default new ROIService();

@@ -31,9 +31,11 @@ const WalletSummary = ({
         <div
           key={card.title}
           className="
-            bg-[#f4f2f0]
+            bg-white
+dark:bg-slate-900
             border
-            border-[#d2cecb]
+            border-slate-200
+dark:border-slate-700
             rounded-[12px]
             p-6
             transition-all
@@ -57,7 +59,8 @@ const WalletSummary = ({
               mt-4
               text-4xl
               font-normal
-              text-[#0c0a08]
+              text-slate-900
+dark:text-white
               leading-none
             "
           >

@@ -23,50 +23,65 @@ class UserRepository {
     });
   }
 
-  async incrementWallet( id,
+
+
+async incrementWallet(
+  id,
   amount,
-  session = null) {
-    return User.findByIdAndUpdate(
-      id,
-      {
-        $inc: {
-          walletBalance: amount,
-        },
+  session = null
+) {
+  return User.findByIdAndUpdate(
+    id,
+    {
+      $inc: {
+        walletBalance: amount,
       },
-      {
-        new: true,
-        session,
-      },
-    );
-  }
+    },
+    {
+      returnDocument: "after",
+      session,
+    }
+  );
+}
 
-  async incrementROI(id, amount) {
-    return User.findByIdAndUpdate(
-      id,
-      {
-        $inc: {
-          totalROIEarned: amount,
-        },
+async incrementROI(
+  id,
+  amount,
+  session = null
+) {
+  return User.findByIdAndUpdate(
+    id,
+    {
+      $inc: {
+        totalROIEarned: amount,
       },
-      {
-        new: true,
-      },
-    );
-  }
+    },
+    {
+      returnDocument: "after",
+      session,
+    }
+  );
+}
 
-  async incrementLevelIncome(id, amount) {
-    return User.findByIdAndUpdate(
-      id,
-      {
-        $inc: {
-          totalLevelIncomeEarned: amount,
-        },
+async incrementLevelIncome(
+  id,
+  amount,
+  session = null
+) {
+  return User.findByIdAndUpdate(
+    id,
+    {
+      $inc: {
+        totalLevelIncomeEarned:
+          amount,
       },
-      {
-        new: true,
-      },
-    );
-  }
+    },
+    {
+      returnDocument: "after",
+      session,
+    }
+  );
+}
 
   async getDirectReferrals(userId) {
     return User.find({

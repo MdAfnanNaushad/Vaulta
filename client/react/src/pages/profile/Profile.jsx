@@ -44,16 +44,19 @@ const Profile = () => {
           Account
         </p>
 
-        <h1 className="mt-2 text-5xl font-normal text-[#0c0a08]">
+        <h1 className="mt-2 text-5xl font-normal text-slate-900
+dark:text-white">
           Profile
         </h1>
       </div>
 
       <div
         className="
-          bg-[#f4f2f0]
+          bg-white
+dark:bg-slate-900
           border
-          border-[#d2cecb]
+          border-slate-200
+dark:border-slate-700
           rounded-[12px]
           p-8
         "

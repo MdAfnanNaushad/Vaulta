@@ -45,78 +45,103 @@ const Dashboard = () => {
     <div className="space-y-10">
       {/* Hero Section */}
       <section
+  className="
+    rounded-[12px]
+    overflow-hidden
+
+    border
+    border-slate-200
+    dark:border-slate-700
+
+    bg-gradient-to-r
+    from-[#0f172a]
+    via-[#1e3a8a]
+    to-[#06b6d4]
+
+    dark:from-[#020617]
+    dark:via-[#0f172a]
+    dark:to-[#1e293b]
+
+    p-8
+    md:p-12
+  "
+>
+  <div className="max-w-3xl">
+    <p
+      className="
+        text-cyan-100
+        text-sm
+        uppercase
+        tracking-wider
+      "
+    >
+      Investment Dashboard
+    </p>
+
+    <h1
+      className="
+        mt-3
+        text-3xl
+        md:text-5xl
+        font-bold
+        text-white
+      "
+    >
+      Welcome Back,
+      {" "}
+      {data?.user?.fullName || "Investor"}
+    </h1>
+
+    <p
+      className="
+        mt-4
+        text-slate-200
+        text-lg
+      "
+    >
+      Track your investments, monitor ROI,
+      and grow your wealth through referrals.
+    </p>
+
+    <div className="mt-8 flex flex-wrap gap-4">
+      <div
         className="
-          rounded-[12px]
-          overflow-hidden
-          border
-          border-[#d2cecb]
-
-          bg-gradient-to-r
-          from-[#0c0a08]
-          via-[#5683d2]
-          to-[#f4f2f0]
-
-          p-8
-          md:p-12
+          bg-white/10
+          backdrop-blur
+          px-5
+          py-3
+          rounded-xl
         "
       >
-        <div className="max-w-3xl">
-          <span
-            className="
-              inline-flex
-              items-center
+        <p className="text-slate-300 text-sm">
+          Wallet Balance
+        </p>
 
-              px-3
-              py-1
+        <p className="text-white text-2xl font-bold">
+          ₹{data?.walletBalance || 0}
+        </p>
+      </div>
 
-              rounded-full
+      <div
+        className="
+          bg-white/10
+          backdrop-blur
+          px-5
+          py-3
+          rounded-xl
+        "
+      >
+        <p className="text-slate-300 text-sm">
+          Total ROI
+        </p>
 
-              bg-white/10
-              backdrop-blur-md
-
-              text-white
-              text-sm
-            "
-          >
-            Financial Intelligence Platform
-          </span>
-
-          <h1
-            className="
-              mt-5
-
-              text-4xl
-              md:text-6xl
-
-              font-medium
-              leading-tight
-
-              text-white
-            "
-          >
-            Monitor investments,
-            referrals and earnings
-            from a single dashboard.
-          </h1>
-
-          <p
-            className="
-              mt-5
-
-              text-lg
-
-              text-white/80
-
-              max-w-2xl
-            "
-          >
-            Track portfolio growth,
-            referral performance,
-            wallet balances and ROI
-            distributions in real time.
-          </p>
-        </div>
-      </section>
+        <p className="text-white text-2xl font-bold">
+          ₹{data?.roiTotal || 0}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* KPI Cards */}
       <section>
@@ -159,13 +184,13 @@ const Dashboard = () => {
 
           <StatCard
             title="ROI Earned"
-            value={`₹${data.totalROIEarned || 0}`}
+            value={`₹${data.roiTotal || 0}`}
             icon={<TrendingUp size={18} />}
           />
 
           <StatCard
             title="Referral Income"
-            value={`₹${data.totalLevelIncome || 0}`}
+            value={`₹${data.referralTotal || 0}`}
             icon={<Users size={18} />}
           />
 

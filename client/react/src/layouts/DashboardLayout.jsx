@@ -8,19 +8,19 @@ const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div
+  className="
+  min-h-screen
+  bg-slate-50
+  dark:bg-slate-950
+  transition-all
+"
+>
       <div className="flex">
-        <Sidebar
-          open={sidebarOpen}
-          setOpen={setSidebarOpen}
-        />
+        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
 
         <div className="flex-1 min-w-0">
-          <Header
-            toggleSidebar={() =>
-              setSidebarOpen(!sidebarOpen)
-            }
-          />
+          <Header toggleSidebar={() => setSidebarOpen((prev) => !prev)} />
 
           <main
             className="

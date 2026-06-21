@@ -10,61 +10,34 @@ import referralService from "./referral.service.js";
 
 class InvestmentService {
   async createInvestment(
+  userId,
+  payload
+) {
+  const investment =
+    await investmentRepository.create({
+      user: userId,
+      amount: payload.amount,
+      planName: payload.planName,
+      startDate: payload.startDate,
+      endDate: payload.endDate,
+      dailyROIPercentage:
+        payload.dailyROIPercentage,
+    });
+
+  await transactionRepository.create({
+    user: userId,
+    type: "INVESTMENT",
+    amount: payload.amount,
+    source: payload.planName,
+  });
+
+  await referralService.processReferralIncome(
     userId,
-    payload
-  ) {
-    const session =
-      await mongoose.startSession();
+    payload.amount
+  );
 
-    session.startTransaction();
-
-    try {
-      const investment =
-        await investmentRepository.create({
-          user: userId,
-
-          amount: payload.amount,
-
-          planName:
-            payload.planName,
-
-          startDate:
-            payload.startDate,
-
-          endDate:
-            payload.endDate,
-
-          dailyROIPercentage:
-            payload.dailyROIPercentage,
-        });
-
-      await transactionRepository.create({
-        user: userId,
-
-        type: "INVESTMENT",
-
-        amount: payload.amount,
-
-        source:
-          payload.planName,
-      });
-
-      await referralService.processReferralIncome(
-        userId,
-        payload.amount
-      );
-
-      await session.commitTransaction();
-
-      return investment;
-    } catch (error) {
-      await session.abortTransaction();
-
-      throw error;
-    } finally {
-      session.endSession();
-    }
-  }
+  return investment;
+}
 
   async getUserInvestments(
     userId

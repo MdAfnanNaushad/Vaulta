@@ -42,9 +42,22 @@ class CronService {
       const investments =
         await investmentRepository.getActiveInvestments();
 
-      logger.info(
-        `Processing ${investments.length} investments`
-      );
+      console.log("===============");
+console.log("ACTIVE INVESTMENTS");
+console.log(investments.length);
+
+investments.forEach((i) => {
+  console.log({
+    id: i._id,
+    plan: i.planName,
+    amount: i.amount,
+    startDate: i.startDate,
+    endDate: i.endDate,
+    user: i.user?._id,
+  });
+});
+
+console.log("===============");
 
       const results =
         await roiService.processMultipleInvestments(
